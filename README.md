@@ -42,7 +42,7 @@ I have `3 Requirements` for this project to be considered a success:
          - Short answer: Wrong processor architecture. This is what causes problems.
      - This fulfills `Requirement 3`: Using only currently supported hardware.
 
-### Archives To Pull From:
+## Archives To Pull From:
 
 - [Archive 1](https://pauhh.planet.ee/programmid/) - Mostly old MS-DOS software for `/\/\` and `Kenwood` 2way.
 - [Archive 2](https://wiki.w9cr.net/index.php/EF_Johnson) - `EFJohnson` 2way Software for Windows.
@@ -51,6 +51,19 @@ I have `3 Requirements` for this project to be considered a success:
 - [Archive 5](https://wiki.w9cr.net/index.php/Astro_Spectra) - `/\/\` Astro Spectra & AS Depot for Windows.
 - [Archive 6](https://archive.org/download/astro25portablecpsr20.01.00) - `/\/\` Astro25 Portable Software.
 
+### Other Useful Ham Tools [FW updates, etc.]:
+
+- [`hugen79`](https://github.com/hugen79/) &quot;stock&quot; : [FW Version](https://github.com/hugen79/NanoVNA-H/releases)
+- [`DiSlord`](https://github.com/DiSlord) &quot;enhanced&quot; : [FW Version](https://github.com/DiSlord/NanoVNA-D/releases)
+
+- [tinySA Home](https://tinysa.org/wiki/pmwiki.php?n=Main.HomePage)
+- [TinySA Version Comparison Table](https://www.tinysa.org/wiki/pmwiki.php?n=TinySA4.Comparison).
+     - [FW Version](http://athome.kaashoek.com/tinySA/DFU/) for tinySA Basic.
+     - [FW Version](http://athome.kaashoek.com/tinySA4/DFU/) for `tinysa4` : tinySA Ultra ZS405, Ultra+ ZS406 &amp; tinySA Ultra+ ZS407.
+
+```
+[tinySASaver]() by Erik
+```
 
 #### Disclaimer:
 
