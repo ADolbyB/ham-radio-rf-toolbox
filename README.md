@@ -61,9 +61,7 @@ I have `3 Requirements` for this project to be considered a success:
      - [FW Version](http://athome.kaashoek.com/tinySA/DFU/) for tinySA Basic.
      - [FW Version](http://athome.kaashoek.com/tinySA4/DFU/) for `tinysa4` : tinySA Ultra ZS405, Ultra+ ZS406 &amp; tinySA Ultra+ ZS407.
 
-```
-[tinySASaver]() by Erik
-```
+[//]: # ([tinySASaver]() by Erik)
 
 #### Disclaimer:
 
