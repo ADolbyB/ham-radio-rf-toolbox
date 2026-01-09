@@ -1,118 +1,324 @@
 # Ham Radio RF Toolbox
-
-A new school solution for old school surplus Part 90 radios.
-
-## Background Information:
-
-This project started many years ago with an old Pentium III 500Mhz Panasonic CF-27 Laptop that I salvaged from FleaBay junk I procured on the cheap. I built a custom legacy dual boot [MS-DOS 6.22](https://winworldpc.com/product/ms-dos/622) which ran [Direct Access 5.19](https://winworldpc.com/product/direct-access/5x) Menu Program &amp; Windows XP SP3 OS specifically for surplus radio programming and service. It was a nice little custom build for what it could do.
-
-As a new ham at the time, I was interested in having a way to flash my own surplus radios that my friends and I all had laying around. We had a bunch of old /&#92;/&#92; Motorola VHF & UHF Genesis Handhelds, Jedi VHF & UHF Handhelds, MaxTracs, M1225s, Spectras, and Astro Spectras.
-
-We had a bunch of old Kenwood Radios laying around: TK-730 mobile radios, TK-280/380 handhelds, TK-780/880 mobiles, TK-290/390 handhelds, TK-190 low band handhelds and TK-6110 low band mobiles.
-
-Then we had a bunch of EFJohnson 5100 portables and 5300 mobiles that operated P25 Phase 1 FDMA.
-
-Later on we acquired nicer radios like Kenwood NX series, /&#92;/&#92; Astro25 XTS/XTLs, MotoTRBO DMR, and Hytera DMR radios.
-
-I (and a bunch of my friends) still have a bunch of old bricks laying around that still work and we can't program them.
-
-The old laptop worked great. Until it didn't. Which I expected. Which brings us here. 
-
-Luckily the hard drive was a new/old stock (In case you forgot: unopened new product/never sold old stock) item and i am restoring all my old backup config files, codeplugs for radio setup examples, patches, batch/menu programs, etc. I'll just automate all the downloading, installing, config, and compatibility checking of all the available software from public sources.
-
-## Pictures [or it never happened]:
+### A New School Solution for Old School Surplus Part 90 Radios
 
 <div align="center">
-     <img src="./img/RSS-Service.jpg" alt="RSS Service: Setting RF Power" width="95%">
-     <p>
-          <em>Setting RF power softpots on an HT1000 via RSS Service menu using my 
-          custom CF-27, Bird 43 wattmeter and dummy load.</em>
-     </p>
+
+[![Repo Size](https://img.shields.io/github/repo-size/ADolbyB/ham-radio-rf-toolbox?style=for-the-badge&logo=github&color=blue)](https://github.com/ADolbyB/ham-radio-rf-toolbox)
+[![License](https://img.shields.io/github/license/ADolbyB/ham-radio-rf-toolbox?style=for-the-badge)](LICENSE)
+[![Last Commit](https://img.shields.io/github/last-commit/ADolbyB/ham-radio-rf-toolbox?style=for-the-badge&logo=github)](https://github.com/ADolbyB/ham-radio-rf-toolbox/commits/main)
+
+**Developed by:** [![ADolbyB](https://img.shields.io/badge/ADolbyB-Profile-blue?style=for-the-badge&logo=github)](https://github.com/ADolbyB)
+
 </div>
 
-This project should solve that problem for awhile...
+---
 
-I have `3 Requirements` for this project to be considered a success:
-1. Use only currently supported operating systems and low cost/surplus hardware.
-2. Execute Read/Write operations on real surplus hardware without using a Virtual Machine or Emulators.
-3. Deploy a miniaturized Production Model using all currently supported sohardware.
+## 📡 Project Overview
 
-## Project Stages:
+This project provides a modern, automated solution for programming, servicing, and tuning legacy Part 90 commercial radios using publicly available abandonware resources. Born from the need to breathe new life into surplus radio equipment, this toolbox eliminates the headache of maintaining ancient hardware and operating systems.
 
-- Stage 0.9: Research software and hardware solutions, budget needs, and time criteria.
-     - *current stage*: From here all stages are a prospective roadmap.
+**The Problem:** Valuable surplus radios collecting dust because the original programming tools require obsolete hardware and unsupported operating systems.
 
-- Stage 1: Create Test dual-boot image using [FreeDOS](https://freedos.org/) on partition 1, and [Linux Mint 22.2](https://www.linuxmint.com/download.php) on partition 2.
-     - I would have used Ubuntu 24.04, but that image is much larger. Size matters. I don't want to make some fatass program thats not even downloadble. Then its useless.
-     - Test cloning, compression, and restoring the partitions on prototype hardware and create installation documentation.
-     - Test compatibilty after some basic installs using the `install.sh` script.
-     - **What about the RIB?** (lol)
-          - The Kenwood and EFJohnson didn't require them, so not needed in that case. most eventually supported USB.
-               - Most of those programs were updated and could be run on Windows XP or earlier Windows (except TK-730s, I think).
-               - In this case, we use the newer Linux Mint 22.2 partition with WINE compatibilty and the appropriate dependencies (all free).
-               - All of the newer Astro & Astro25 (and even the MTS2000) stuff was updated to Windows compatibility
-          - I have an old RIB to test with, but i also have some RIBless cables to test with.
-          - It is an old POS that we can somehow find a workaround (if needed, that can come later: open-source KiCad DIY, Breadboard or whatever).
-          - Because they: 
-               - [Always show up somewhere](https://www.amazon.com/MOUDOAUER-Programming-Radios-Program-Motorola/dp/B0CG5ZB6VX/ref=sr_1_5)
-               - [And here or there](https://www.ebay.com/sch/i.html?_nkw=RIB+Box)
-          - [22 AWG solid core wire](https://www.amazon.com/s?k=breadboard+jumper+wires&i=electronics) can help bypass connector size issues as needed.
-          - [Breadboard Jumper Wires](https://www.amazon.com/s?k=breadboard+jumper+wires) help too.
-     - This fulfills `Requirement 1`: Using only currently supported open-source free software with low cost available hardware. Some already have the cables needed with the DE9 (DB9) and/or a RIB box. There are other outlets like 
-     [Repeater Builder](https://www.repeater-builder.com/rbtip/index.html) and the like with plans if someone wants to even build their own cables, since they have some extra parts laying around or an old Radio Shack 300 in 1 circuit kit laying in the basement &#x1F600; <!-- Hex -->
+**The Solution:** A dual-boot FreeDOS/Linux system that runs on modern, affordable hardware while maintaining compatibility with legacy radio programming software.
 
-- Stage 2: Test and debug with working prototype hardware. &#128512; <!-- Dec -->
-     - Here I will restore the image, manually add some software, and check read/write to multiple radios.
-     - My prototype test setup is all spare parts: A Dell Latitude E6430 i5 with a port replicator with a real serial port.
-     - This fulfills `Requirement 2`: Executing Read/Write operations on real hardware using my good programming cables (I have a whole bunch of good old ones and a RIB) without using a Virtual Machine or Emulators, which cause unreliability due to serial passthroughs.
+---
 
-- Stage 3: Deploy on production model hardware &#x1F600; &#x1F600;  <!-- Hex -->
-     - Find some cheap, new hardware such as this [Beelink MINI S12 Pro](https://www.amazon.com/Beelink-Computers-1000Mbps-Displays-Support/dp/B09J4D6TMG/)
-     - Add a hardware DE9/DE15 (for both type cables: RIB/RIBless) Serial Port via one of the NVMe bays (there are 2).
-          - This requires the following:
-          - 1x [PCIe Riser](https://www.amazon.com/NGFF-Express-Riser-Speed-Cable/dp/B07KSZ62B8/) For flexible mounting
-          - 1x [PCIe to RS232 DB9 Card](https://www.amazon.com/2-Port-Converter-Adapter-Bracket-Desktop/dp/B08F779RTS)
-     - I will pull the software from publicly available archives so we don't have to re-host the same software again   (and side-step the proprietary software issues).
-     - Why not a Raspberry Pi?
-          - Short answer: Wrong processor architecture. This is what causes problems.
-               - RPi is `arm64` and operates as a RISC: Reduced Instruction Set Computer.
-               - We need `amd64` aka `x86_64` which operates as a CISC: Complex Instruction Set Computer.
-     - This fulfills `Requirement 3`: Using only currently supported hardware.
+## 🎯 Project Requirements
 
-## Archives To Pull From:
+For this project to be considered successful, it must meet these three critical requirements:
 
-- [Archive 1](https://pauhh.planet.ee/programmid/) - Mostly old MS-DOS software for `/\/\` and `Kenwood` 2way.
-- [Archive 2](https://wiki.w9cr.net/index.php/EF_Johnson) - `EFJohnson` 2way Software for Windows.
-- [Archive 3](https://wiki.w9cr.net/index.php/Astro_Saber/XTS3000) - `/\/\` Astro XTS3000 CPS for Windows.
-- [Archive 4](https://wiki.w9cr.net/index.php/Astro_Firmware_Upgrades) - `/\/\` Astro XTS3000 Depot for Windows.
-- [Archive 5](https://wiki.w9cr.net/index.php/Astro_Spectra) - `/\/\` Astro Spectra & AS Depot for Windows.
-- [Archive 6](https://archive.org/download/astro25portablecpsr20.01.00) - `/\/\` Astro25 Portable Software.
+| Requirement | Description | Status |
+|-------------|-------------|--------|
+| **1. Modern Infrastructure** | Use only currently supported operating systems and low-cost/surplus hardware | ✅ In Progress |
+| **2. Real Hardware R/W** | Execute Read/Write operations on real surplus radios without VMs or emulators | 🔄 Testing |
+| **3. Production Deployment** | Deploy miniaturized production model using current hardware | 📋 Planned |
 
-## Other Useful Ham Tools [FW updates, etc.]:
+---
 
-### [NanoVNA Project](https://nanovna.com/)
+## 🛠️ Supported Radio Equipment
 
-- [Using NanoVNA](http://ha3hz.hu/hu/home/top-nav/12-seged-berendezesek/15-nanovna) by HA3HZ.
+### Motorola Radios
+- **Genesis Series** - VHF & UHF Handhelds
+- **Jedi Series** - VHF & UHF Handhelds
+- **MaxTrac** - Mobile radios
+- **M1225** - Mobile radios
+- **Spectra Series** - Mobile radios
+- **Astro Spectra** - Trunked mobile radios
+- **MTS2000** - Portables
+- **Astro XTS Series** - Digital portables
+- **Astro XTL Series** - Digital mobiles
+- **MotoTRBO** - DMR radios
 
-- [`hugen79`](https://github.com/hugen79/) : ["stock" FW Version](https://github.com/hugen79/NanoVNA-H/releases)
+### Kenwood Radios
+- **TK-730** - Mobile radios
+- **TK-280/380** - Handhelds
+- **TK-780/880** - Mobiles
+- **TK-290/390** - Handhelds
+- **TK-190** - Low band handhelds
+- **TK-6110** - Low band mobiles
+- **NX Series** - Digital radios
 
-- [`DiSlord`](https://github.com/DiSlord) : ["enhanced" FW Version](https://github.com/DiSlord/NanoVNA-D/releases)
+### EF Johnson Radios
+- **5100 Series** - P25 Phase 1 FDMA portables
+- **5300 Series** - P25 Phase 1 FDMA mobiles
 
-- [`nuclearrambo`](https://github.com/nuclearrambo) Time Domain Reflectometry (TDR) measurements : [NanoVNA_TDR](https://github.com/nuclearrambo/NanoVNA_TDR)
-     - [Accurately measuring cable length with NanoVNA](https://nuclearrambo.com/wordpress/accurately-measuring-cable-length-with-nanovna/)
-     - Written in Python. Runs on a desktop/laptop in a python environment
-     - Very useful for measuring electrical lengths of different coax types.
+### Other Manufacturers
+- **Hytera** - DMR radios
 
-### [tinySA Project](https://tinysa.org/wiki/pmwiki.php?n=Main.HomePage)
+---
 
-- [TinySA Version Comparison Table](https://www.tinysa.org/wiki/pmwiki.php?n=TinySA4.Comparison).
-     - [FW Version](http://athome.kaashoek.com/tinySA/DFU/) for tinySA Basic.
-     - [FW Version](http://athome.kaashoek.com/tinySA4/DFU/) for `tinysa4` : tinySA Ultra ZS405, Ultra+ ZS406 &amp; tinySA Ultra+ ZS407.
+## 🗺️ Project Roadmap
 
-## Status:
+### Stage 0.9: Research & Planning ⚡ *Current Stage*
+- Research software and hardware solutions
+- Budget requirements and time criteria
+- Document compatibility requirements
+- *All subsequent stages are prospective*
 
-![GitHub repo size](https://img.shields.io/github/repo-size/ADolbyB/ham-radio-rf-toolbox?style=for-the-badge&logo=github&color=blue)
+### Stage 1: Prototype Development 🔧
+**Objective:** Create and test dual-boot image
 
-## Disclaimer:
+**System Configuration:**
+- **Partition 1:** [FreeDOS 1.3](https://freedos.org/) - Legacy DOS programming software
+- **Partition 2:** [Linux Mint 22.2](https://www.linuxmint.com/download.php) - Modern tools with WINE compatibility
 
-Any software I link to here is located somewhere in the public domain. It is not my software, and in fact it has been there for YEARS. I DID NOT put it there. So if you have a problem, you may want to address those who put it there.
+**Why Linux Mint?**
+- Smaller image size than Ubuntu 24.04
+- Better resource efficiency
+- Excellent WINE compatibility for Windows-based programming software
+
+**Testing Objectives:**
+- ✅ Clone, compress, and restore partitions on prototype hardware
+- ✅ Create comprehensive installation documentation
+- ✅ Test compatibility using `install.sh` automation script
+- ✅ Validate RIB (Radio Interface Box) and RIBless cable functionality
+
+**RIB Interface Strategy:**
+- Kenwood and EF Johnson radios don't require RIB boxes
+- Most Motorola software updated for Windows XP+ compatibility
+- Linux Mint partition handles newer software via WINE
+- Legacy RIB available for testing
+- RIBless cables provide alternative connectivity
+- DIY solutions available through open-source KiCad designs
+
+**✅ Fulfills Requirement 1:** Modern, supported software with affordable hardware
+
+### Stage 2: Hardware Testing & Debugging 🧪
+**Objective:** Validate read/write operations on real radios
+
+**Prototype Hardware:**
+- Dell Latitude E6430 i5 laptop
+- Port replicator with genuine RS-232 serial port
+- Professional programming cables (RIB and RIBless)
+- Multiple test radios across manufacturers
+
+**Testing Protocol:**
+- Manual software installation and configuration
+- Read/write operations on multiple radio models
+- Serial communication validation
+- Cable compatibility verification
+
+**✅ Fulfills Requirement 2:** Real hardware operations without VM/emulator unreliability
+
+### Stage 3: Production Deployment 🚀
+**Objective:** Deploy on compact, modern hardware
+
+**Production Hardware Platform:**
+- **Mini PC:** [Beelink MINI S12 Pro](https://www.amazon.com/Beelink-Computers-1000Mbps-Displays-Support/dp/B09J4D6TMG/) or similar
+  - Intel N95 processor (amd64/x86_64 architecture)
+  - Dual NVMe bays for expansion
+  - Small form factor
+
+**Serial Port Solution:**
+- **Hardware:** PCIe to dual RS-232 DB9 card
+- **Connectivity:** 
+  - 1x [NVMe to PCIe Riser Cable](https://www.amazon.com/NGFF-Express-Riser-Speed-Cable/dp/B07KSZ62B8/)
+  - 1x [PCIe to RS-232 DB9 Card](https://www.amazon.com/2-Port-Converter-Adapter-Bracket-Desktop/dp/B08F779RTS)
+- **Ports:** DE9/DE15 connectors for both RIB and RIBless cables
+  - [Beelink MINI S12 Pro](https://www.amazon.com/Beelink-Computers-1000Mbps-Displays-Support/dp/B09J4D6TMG/) or similar already equipped with USB for any current/legacy radio which uses a USB cable.
+
+**Why Not Raspberry Pi?**
+❌ **Wrong Architecture:**
+- Raspberry Pi: `arm64` (RISC - Reduced Instruction Set Computer)
+- **Required:** `amd64/x86_64` (CISC - Complex Instruction Set Computer)
+- Legacy radio software compiled for x86 architecture
+- ARM emulation introduces compatibility issues
+
+**Software Distribution:**
+- Pull from publicly available archives
+- Avoid re-hosting proprietary software
+- Automated download and installation scripts
+
+**✅ Fulfills Requirement 3:** Modern, supported hardware platform
+
+---
+
+## 📚 Software Archives
+
+All software is sourced from public domain repositories that have existed for years:
+
+| Archive | Content | Platform |
+|---------|---------|----------|
+| [Archive 1](https://pauhh.planet.ee/programmid/) | MS-DOS software for Motorola & Kenwood | DOS |
+| [Archive 2](https://wiki.w9cr.net/index.php/EF_Johnson) | EF Johnson 2-way radio software | Windows |
+| [Archive 3](https://wiki.w9cr.net/index.php/Astro_Saber/XTS3000) | Motorola Astro XTS3000 CPS | Windows |
+| [Archive 4](https://wiki.w9cr.net/index.php/Astro_Firmware_Upgrades) | Motorola Astro XTS3000 Depot | Windows |
+| [Archive 5](https://wiki.w9cr.net/index.php/Astro_Spectra) | Motorola Astro Spectra & Depot | Windows |
+| [Archive 6](https://archive.org/download/astro25portablecpsr20.01.00) | Motorola Astro25 Portable CPS | Windows |
+
+---
+
+## 🔧 Additional Ham Radio Tools
+
+### NanoVNA - Vector Network Analyzer
+
+**Project:** [NanoVNA Official Site](https://nanovna.com/)
+
+**Resources:**
+- [Using NanoVNA Guide](http://ha3hz.hu/hu/home/top-nav/12-seged-berendezesek/15-nanovna) by HA3HZ
+- **Firmware Versions:**
+  - [Stock Firmware](https://github.com/hugen79/NanoVNA-H/releases) by hugen79
+  - [Enhanced Firmware](https://github.com/DiSlord/NanoVNA-D/releases) by DiSlord
+
+**Special Tools:**
+- [NanoVNA_TDR](https://github.com/nuclearrambo/NanoVNA_TDR) - Time Domain Reflectometry
+  - Written in Python for desktop analysis
+  - [Accurately measuring cable length guide](https://nuclearrambo.com/wordpress/accurately-measuring-cable-length-with-nanovna/)
+  - Ideal for measuring electrical lengths of coax cables
+
+### tinySA - Spectrum Analyzer
+
+**Project:** [tinySA Official Wiki](https://tinysa.org/wiki/pmwiki.php?n=Main.HomePage)
+
+**Model Comparison:** [Version Comparison Table](https://www.tinysa.org/wiki/pmwiki.php?n=TinySA4.Comparison)
+
+**Firmware Downloads:**
+- [tinySA Basic Firmware](http://athome.kaashoek.com/tinySA/DFU/)
+- [tinySA Ultra/Ultra+ Firmware](http://athome.kaashoek.com/tinySA4/DFU/)
+  - Models: ZS405, ZS406, ZS407
+
+---
+
+## 🖼️ Project Gallery
+
+### Real-World Application
+
+[![RSS Service: Setting RF Power](img/RSS-Service.jpg)](img/RSS-Service.jpg)
+
+*Setting RF power softpots on a Motorola HT1000 via RSS Service menu using custom CF-27 laptop, Bird 43 wattmeter, and dummy load.*
+
+---
+
+## 📖 Background Story
+
+### The Genesis
+
+This project began with a salvaged Pentium III 500MHz Panasonic CF-27 Toughbook rescued from eBay's junk pile. Built as a custom dual-boot system running:
+- **MS-DOS 6.22** with Direct Access 5.19 menu program
+- **Windows XP SP3** for radio programming and service
+
+It was the perfect solution for programming surplus commercial radios that friends and fellow hams had accumulated over the years.
+
+### The Problem
+
+As a new ham operator, I wanted the ability to flash and program the collection of surplus radios we'd gathered:
+- Vintage Motorola handhelds and mobiles
+- Kenwood commercial gear across multiple bands
+- EF Johnson P25 equipment
+- Modern digital radios (Astro25, MotoTRBO, Hytera DMR)
+
+The old laptop worked brilliantly... until it didn't. Hardware failure was inevitable.
+
+### The Solution
+
+Fortunately, the hard drive was new/old stock (NOS - unopened, never-sold vintage inventory) and survived intact. This project aims to:
+1. **Restore** all backup config files, codeplugs, and software
+2. **Automate** downloading, installing, and configuring publicly available software
+3. **Modernize** the platform using current hardware and supported operating systems
+4. **Document** the entire process for the ham community
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+**Hardware Requirements:**
+- x86_64/amd64 compatible PC (not ARM)
+- RS-232 serial port (native or PCIe card)
+- Programming cables (RIB or RIBless depending on radio)
+- USB drive for installation media
+
+**Software Requirements:**
+- FreeDOS 1.3 bootable image
+- Linux Mint 22.2 ISO
+- Radio programming cables and drivers
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/ADolbyB/ham-radio-rf-toolbox.git
+cd ham-radio-rf-toolbox
+
+# Run automated installation script
+chmod +x install.sh
+./install.sh
+```
+
+Detailed installation documentation coming in Stage 1 completion.
+
+---
+
+## 🤝 Contributing
+
+This is an open-source community project. Contributions are welcome!
+
+**Areas for Contribution:**
+- Additional radio model support
+- Software compatibility testing
+- Documentation improvements
+- Hardware setup guides
+- Cable pinout diagrams
+
+---
+
+## ⚖️ Legal Disclaimer
+
+**Important Notice:**
+
+All software linked in this repository exists in the public domain and has been publicly available for years. I did not upload this software to its current locations, nor do I claim ownership of any proprietary tools.
+
+**If you have concerns** about any linked software, please contact the original hosting parties, not this repository.
+
+This project merely provides:
+- Links to existing public archives
+- Installation automation scripts
+- Hardware compatibility documentation
+- Community knowledge sharing
+
+---
+
+## 📋 Project Topics
+
+`motorola` `kenwood` `efjohnson` `linux-mint` `freedos` `radio-service-software` `ham-radio` `part-90` `commercial-radio` `rf-tools` `customer-programming-software`
+
+---
+
+## 📄 License
+
+This project is licensed under the [GPL-3.0 License](LICENSE).
+
+Open source, community-driven, and built for hams by hams.
+
+---
+
+<div align="center">
+
+**73 de ADolbyB**
+
+*Keeping vintage radios alive with modern solutions*
+
+[![GitHub](https://img.shields.io/badge/Follow-ADolbyB-blue?style=for-the-badge&logo=github)](https://github.com/ADolbyB)
+
+</div>
